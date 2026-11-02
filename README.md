@@ -1,14 +1,16 @@
-# VocabInk Backend
+# VocabInk Backend API
 
-**Turn new vocabulary into meaningful professional content.**
+**The API powering VocabInk’s vocabulary management and AI-assisted content creation.**
 
-VocabInk is a personal vocabulary builder and AI-powered writing assistant for developers and professionals who want to strengthen their English and share their learning on LinkedIn. It connects vocabulary practice with practical writing, helping users apply new words in content shaped by their professional interests and experience.
+VocabInk helps developers and professionals expand their English vocabulary and apply what they learn in LinkedIn content. This repository contains its Node.js and Express backend, which manages application data in PostgreSQL and integrates with Google Gemini, Google OAuth, and LinkedIn.
 
-This repository contains the backend API that powers VocabInk: vocabulary management, personalized onboarding, authentication, and AI-assisted post generation with Google Gemini. Users can build a personal dictionary, select a writing template, and create LinkedIn post drafts that incorporate the vocabulary they are learning.
+The API provides authentication, user profiles and onboarding, personal vocabulary management, writing templates, and AI-generated post drafts. Routes are organized under `/v1`, with separate layers for request validation, business logic, and database access.
 
-Frontend application: [VocabInk Frontend](https://github.com/kevinmoraTec/VocabInk-Frontend-Repository).
+The user interface is maintained separately in the [VocabInk Frontend repository](https://github.com/kevinmoraTec/VocabInk-Frontend-Repository). Run that application alongside this API to use the complete product.
 
 ## Demo
+
+The following demo shows the complete VocabInk application, including its frontend and backend integration.
 
 https://github.com/user-attachments/assets/d9d2f008-d460-4a34-b0df-a38e3b7deb14
 
@@ -16,20 +18,20 @@ https://github.com/user-attachments/assets/d9d2f008-d460-4a34-b0df-a38e3b7deb14
 ## Contents
 
 - [Demo](#demo)
-- [Features](#features)
+- [Backend Capabilities](#backend-capabilities)
+- [API Overview](#api-overview)
 - [Tech Stack](#tech-stack)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Environment Variables](#environment-variables)
 - [Database Setup](#database-setup)
-- [Running the Application](#running-the-application)
+- [Running the API](#running-the-api)
 - [Project Structure](#project-structure)
 - [Validation](#validation)
 - [Contributing](#contributing)
-- [Uploading to GitHub](#uploading-to-github)
 - [License](#license)
 
-## Features
+## Backend Capabilities
 
 - **Personal vocabulary management:** Create, organize, update, and review words and phrases in a personal dictionary.
 - **AI-assisted writing:** Generate LinkedIn post drafts with Google Gemini using selected vocabulary, professional context, and English proficiency level.
@@ -38,8 +40,30 @@ https://github.com/user-attachments/assets/d9d2f008-d460-4a34-b0df-a38e3b7deb14
 - **Account authentication:** Support Google sign-in and LinkedIn account integration through Passport.js, with JWT-based authentication.
 - **User feedback:** Collect bug reports and feature requests to support product improvements.
 
+## API Overview
+
+Local API base URL: `http://localhost:3000/v1`.
+
+| Route prefix | Responsibility |
+| --- | --- |
+| `/auth` | Google OAuth, authentication verification, and logout |
+| `/auth/linkedin` | LinkedIn account integration |
+| `/users` | User profiles and onboarding |
+| `/vocabulary` | Personal vocabulary records |
+| `/category-vocabulary` | Vocabulary categories |
+| `/system-templates` | Writing templates for AI generation |
+| `/posts` | Post generation and draft management |
+| `/post-actions` | Post interaction records |
+| `/feedback` | User feedback submissions |
+| `/landipage` | Landing-page email registrations |
+
+These are route prefixes; available methods and subpaths are defined in `src/routes/`.
+Protected endpoints use JWT authentication through the `token` HTTP-only cookie.
+Configure the frontend to send credentials with API requests and use this `/v1` base URL.
+
 ## Tech Stack
 
+- **Language**: JavaScript (ES modules)
 - **Runtime**: [Node.js](https://nodejs.org/)
 - **Framework**: [Express.js](https://expressjs.com/)
 - **Database**: [PostgreSQL](https://www.postgresql.org/)
@@ -114,7 +138,7 @@ To revert migrations if needed:
 - Undo last migration: `npm run migrations:undo`
 - Revert all: `npm run migrations:revert`
 
-## Running the Application
+## Running the API
 
 ### Development Mode
 
@@ -170,21 +194,6 @@ Contributions are welcome. For substantial changes, open an issue first to discu
 2. Follow the existing route, service, schema, and model structure.
 3. Run `npm run check` and verify any affected flows with the required services configured.
 4. Open a pull request describing the change and how you verified it.
-
-## Uploading to GitHub
-
-Create an empty GitHub repository, then run from this folder:
-
-```bash
-git add .
-git diff --cached --stat
-git commit -m "Initial commit"
-git remote add origin https://github.com/kevinmoraTec/VocabInk-API-Repository.git
-git push -u origin main
-```
-
-Local secrets and `node_modules/`
-are excluded by `.gitignore`.
 
 ## License
 
