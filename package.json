@@ -1,0 +1,49 @@
+{
+  "name": "lingoloop-backend",
+  "version": "1.0.0",
+  "description": "Backend lingoloop Don't just memorize words; USE them to build your personal brand.",
+  "license": "MIT",
+  "author": "Kevin Mora",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch index.js",
+    "start": "node index.js",
+    "seed:run": "sequelize-cli db:seed:all",
+    "seed:generate": "sequelize-cli seed:generate --name",
+    "seed:one": "sequelize-cli db:seed --seed",
+    "migrations:generate": "sequelize-cli migration:generate --name",
+    "migrations:run": "sequelize-cli db:migrate",
+    "migrations:revert": "sequelize-cli db:migrate:undo:all",
+    "migrations:undo": "sequelize-cli db:migrate:undo",
+    "check": "node scripts/check-syntax.js"
+  },
+  "dependencies": {
+    "@google/genai": "^1.35.0",
+    "@hapi/boom": "^10.0.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "express-session": "^1.18.2",
+    "helmet": "^8.1.0",
+    "joi": "^18.0.2",
+    "jsonwebtoken": "^9.0.3",
+    "morgan": "^1.10.1",
+    "multer": "^2.0.2",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-linkedin-oauth2": "^2.0.0",
+    "pg": "^8.16.3",
+    "pg-hstore": "^2.3.4",
+    "zod-to-json-schema": "^3.25.1",
+    "sequelize": "^6.37.7",
+    "passport-oauth2": "^1.8.0"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.3"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  }
+}
